@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CodeDrill — Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">&lt;/&gt;</span>CodeDrill</a
+        >
+        <nav class="nav">
+          <a href="index.html" class="active">Home</a>
+          <a href="categories.html">Problems</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="new-problem.html">Create</a>
+        </nav>
+        <div class="spacer"></div>
+        <label class="header-search">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
+          <input placeholder="Search problems…" />
+          <kbd>/</kbd>
+        </label>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <a href="dashboard.html" class="avatar" title="Your dashboard">AK</a>
+        <button class="icon-btn menu-btn" data-menu-toggle aria-label="Menu">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow"
+              ><span class="badge accent">New</span> 40 fresh Recursion-2
+              problems</span
+            >
+            <h1>
+              Build coding muscle,<br /><span class="grad"
+                >one small problem</span
+              >
+              at a time.
+            </h1>
+            <p class="lead">
+              Short, focused JavaScript &amp; Python exercises with instant
+              feedback. Write a function, hit run, and see every test case light
+              up green.
+            </p>
+            <div class="hero-cta">
+              <a href="problem.html" class="btn btn-primary btn-lg">
+                Start practicing
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="categories.html" class="btn btn-lg">Browse categories</a>
+            </div>
+            <div class="hero-stats">
+              <div><strong>1,240+</strong><span>Problems</span></div>
+              <div><strong>38k</strong><span>Learners</span></div>
+              <div><strong>2.1M</strong><span>Solutions run</span></div>
+            </div>
+          </div>
+
+          <div class="mock-editor" aria-hidden="true">
+            <div class="mock-editor-bar">
+              <i></i><i></i><i></i><span>String-1 › makeAbba.js</span>
+            </div>
+            <pre><span class="kw">function</span> <span class="fn">makeAbba</span>(a, b) {
+    <span class="cm">// Return a + b + b + a</span>
+    <span class="kw">return</span> a + b + b + a;
+}</pre>
+            <div class="mock-tests">
+              <div>
+                <span
+                  >makeAbba(<span class="st">"Hi"</span>,
+                  <span class="st">"Bye"</span>) →
+                  <span class="st">"HiByeByeHi"</span></span
+                ><span class="ok">✓ OK</span>
+              </div>
+              <div>
+                <span
+                  >makeAbba(<span class="st">"Yo"</span>,
+                  <span class="st">"Alice"</span>) →
+                  <span class="st">"YoAliceAliceYo"</span></span
+                ><span class="ok">✓ OK</span>
+              </div>
+              <div>
+                <span
+                  >makeAbba(<span class="st">"What"</span>,
+                  <span class="st">"Up"</span>) →
+                  <span class="st">"WhatUpUpWhat"</span></span
+                ><span class="ok">✓ OK</span>
+              </div>
+              <div style="margin-top: 6px; color: #34d399; font-weight: 600">
+                <span>All 3 tests passed</span><span>+10 XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container">
+        <div class="card continue-card">
+          <svg class="ring" viewBox="0 0 36 36">
+            <circle
+              cx="18"
+              cy="18"
+              r="15.9"
+              fill="none"
+              stroke="var(--surface-2)"
+              stroke-width="3.5"
+            />
+            <circle
+              cx="18"
+              cy="18"
+              r="15.9"
+              fill="none"
+              stroke="var(--accent)"
+              stroke-width="3.5"
+              stroke-dasharray="64 100"
+              stroke-linecap="round"
+              transform="rotate(-90 18 18)"
+            />
+            <text
+              x="18"
+              y="21.5"
+              text-anchor="middle"
+              font-size="9"
+              font-weight="700"
+              fill="var(--text)"
+            >
+              64%
+            </text>
+          </svg>
+          <div>
+            <div class="subtle" style="font-size: 13px">
+              Continue where you left off
+            </div>
+            <div style="font-weight: 700; font-size: 17px; margin-top: 2px">
+              String-2 &nbsp;·&nbsp; <span class="mono">xyzThere</span>
+            </div>
+            <div class="muted" style="font-size: 13px; margin-top: 2px">
+              21 of 33 problems solved · 🔥 12-day streak
+            </div>
+          </div>
+          <a href="problem.html" class="btn btn-primary">Resume</a>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Pick a topic</h2>
+              <p>
+                Each set goes from warm-up to tricky. Solve them in order or
+                jump around.
+              </p>
+            </div>
+            <div class="segmented lang-switch">
+              <button class="active">JavaScript</button>
+              <button>Python</button>
+            </div>
+          </div>
+
+          <div class="cat-grid">
+            <a href="categories.html" class="card cat-card">
+              <div class="cat-top">
+                <span class="cat-icon" style="--c: #2563eb">W1</span
+                ><span class="badge easy"><span class="dot"></span>Easy</span>
+              </div>
+              <div>
+                <h3>Warmup-1</h3>
+                <p>
+                  Simple warmup problems to get started with if/else and
+                  booleans.
+                </p>
+              </div>
+              <div>
+                <div class="cat-meta" style="margin-bottom: 8px">
+                  <span>31 problems</span><span>31/31</span>
+                </div>
+                <div class="progress success">
+                  <span style="width: 100%"></span>
+                </div>
+              </div>
+            </a>
+            <a href="categories.html" class="card cat-card">
+              <div class="cat-top">
+                <span class="cat-icon" style="--c: #7c3aed">S1</span
+                ><span class="badge easy"><span class="dot"></span>Easy</span>
+              </div>
+              <div>
+                <h3>String-1</h3>
+                <p>
+                  Basic string problems: substring, length, and concatenation.
+                </p>
+              </div>
+              <div>
+                <div class="cat-meta" style="margin-bottom: 8px">
+                  <span>33 problems</span><span>27/33</span>
+                </div>
+                <div class="progress"><span style="width: 82%"></span></div>
+              </div>
+            </a>
+            <a href="categories.html" class="card cat-card">
+              <div class="cat-top">
+                <span class="cat-icon" style="--c: #ea580c">A1</span
+                ><span class="badge easy"><span class="dot"></span>Easy</span>
+              </div>
+              <div>
+                <h3>Array-1</h3>
+                <p>
+                  Basic array problems with no loops — index access and length.
+                </p>
+              </div>
+              <div>
+                <div class="cat-meta" style="margin-bottom: 8px">
+                  <span>27 problems</span><span>9/27</span>
+                </div>
+                <div class="progress"><span style="width: 33%"></span></div>
+              </div>
+            </a>
+            <a href="categories.html" class="card cat-card">
+              <div class="cat-top">
+                <span class="cat-icon" style="--c: #e11d48">R1</span
+                ><span class="badge hard"><span class="dot"></span>Hard</span>
+              </div>
+              <div>
+                <h3>Recursion-1</h3>
+                <p>
+                  Basic recursion problems. Think base case first, then reduce.
+                </p>
+              </div>
+              <div>
+                <div class="cat-meta" style="margin-bottom: 8px">
+                  <span>30 problems</span><span>0/30</span>
+                </div>
+                <div class="progress"><span style="width: 0%"></span></div>
+              </div>
+            </a>
+          </div>
+          <div style="text-align: center; margin-top: 24px">
+            <a href="categories.html" class="btn">See all 14 categories →</a>
+          </div>
+        </div>
+      </section>
+      <section class="section" style="padding-top: 8px">
+        <div class="container">
+          <div class="section-head">
+            <div><h2>Why practice here</h2></div>
+          </div>
+          <div class="features">
+            <div class="card feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+              </div>
+              <h3>Instant feedback</h3>
+              <p>
+                Run your code against every test case in under a second and see
+                exactly which inputs fail.
+              </p>
+            </div>
+            <div class="card feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M3 3v18h18" />
+                  <path d="m7 15 4-4 3 3 5-6" />
+                </svg>
+              </div>
+              <h3>Track your progress</h3>
+              <p>
+                Streaks, XP, per-topic progress and a full history of every
+                attempt you've made.
+              </p>
+            </div>
+            <div class="card feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </div>
+              <h3>Community problems</h3>
+              <p>
+                Write your own problems with test cases and share them with
+                other learners.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>© 2026 CodeDrill — a CodingBat-style practice site</span>
+        <span class="row"
+          ><a href="#">About</a><a href="#">Help</a><a href="#">GitHub</a></span
+        >
+      </div>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>

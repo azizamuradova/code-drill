@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CodeDrill — makeOutWord</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container" style="max-width: none">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">&lt;/&gt;</span>CodeDrill</a
+        >
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="categories.html" class="active">Problems</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="new-problem.html">Create</a>
+        </nav>
+        <div class="spacer"></div>
+        <span class="badge accent" title="Current streak">🔥 12 days</span>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <a href="dashboard.html" class="avatar" title="Your dashboard">AK</a>
+        <button class="icon-btn menu-btn" data-menu-toggle aria-label="Menu">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="problem-shell">
+      <section class="problem-pane">
+        <div
+          class="tabs"
+          data-tabs="left"
+          style="
+            padding: 0 20px;
+            background: var(--surface);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+          "
+        >
+          <button class="active" data-tab="desc">Description</button>
+          <button data-tab="subs">My submissions</button>
+          <button data-tab="sol">Solution</button>
+        </div>
+
+        <div class="problem-pane-inner">
+          <div class="tab-panel active" id="desc" data-group="left">
+            <div class="breadcrumb">
+              <a href="categories.html">Problems</a><span>/</span
+              ><a href="category.html">String-1</a><span>/</span
+              ><span>4 of 33</span>
+            </div>
+            <div class="problem-title-row">
+              <h1>makeOutWord</h1>
+              <span class="badge easy"><span class="dot"></span>Easy</span>
+              <span class="badge">+10 XP</span>
+            </div>
+            <div class="problem-desc">
+              <p>
+                Given an "out" string of length 4, such as
+                <code>"&lt;&lt;&gt;&gt;"</code>, and a word, return a new string
+                where the word is in the middle of the out string, e.g.
+                <code>"&lt;&lt;word&gt;&gt;"</code>.
+              </p>
+              <p>
+                Note: use <code>str.substring(i, j)</code> to extract the String
+                starting at index i and going up to but not including index j.
+              </p>
+            </div>
+
+            <div class="examples">
+              <h4>Examples</h4>
+              <div class="example">
+                makeOutWord("&lt;&lt;&gt;&gt;", "Yay")<span class="arrow"
+                  >→</span
+                >"&lt;&lt;Yay&gt;&gt;"
+              </div>
+              <div class="example">
+                makeOutWord("&lt;&lt;&gt;&gt;", "WooHoo")<span class="arrow"
+                  >→</span
+                >"&lt;&lt;WooHoo&gt;&gt;"
+              </div>
+              <div class="example">
+                makeOutWord("[[]]", "word")<span class="arrow">→</span
+                >"[[word]]"
+              </div>
+            </div>
+
+            <details class="hint-box">
+              <summary>💡 Show hint</summary>
+              <div class="hint-body">
+                The first half of <code class="mono">out</code> is
+                <code class="mono">out.substring(0, 2)</code>. What's the second
+                half?
+              </div>
+            </details>
+
+            <div
+              class="row"
+              style="margin-top: 24px; flex-wrap: wrap; gap: 8px"
+            >
+              <span class="tag">strings</span><span class="tag">substring</span>
+              <div class="spacer"></div>
+              <span class="subtle" style="font-size: 13px"
+                >83% acceptance · 41k solves</span
+              >
+            </div>
+
+            <div class="problem-nav">
+              <a href="#" class="btn btn-sm btn-ghost">← makeTags</a>
+              <a href="#" class="btn btn-sm btn-ghost">extraEnd →</a>
+            </div>
+          </div>
+          <div class="tab-panel" id="subs" data-group="left">
+            <h3 style="font-size: 16px; margin-bottom: 14px">Your attempts</h3>
+            <div class="card">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>When</th>
+                    <th>Result</th>
+                    <th>Tests</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2 min ago</td>
+                    <td><span class="status fail">✕ Failed</span></td>
+                    <td class="mono">4/7</td>
+                  </tr>
+                  <tr>
+                    <td>5 min ago</td>
+                    <td><span class="status fail">✕ Error</span></td>
+                    <td class="mono">0/7</td>
+                  </tr>
+                  <tr>
+                    <td>Yesterday</td>
+                    <td><span class="status partial">◐ Partial</span></td>
+                    <td class="mono">5/7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-panel" id="sol" data-group="left">
+            <div
+              class="card card-pad"
+              style="text-align: center; padding: 40px 24px"
+            >
+              <div style="font-size: 32px">🔒</div>
+              <h3 style="margin: 10px 0 6px">Solution locked</h3>
+              <p class="muted" style="font-size: 14px">
+                Solve the problem or make 3 attempts to unlock the reference
+                solution.
+              </p>
+              <button class="btn" style="margin-top: 16px">
+                Reveal anyway (no XP)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="work-pane">
+        <div class="editor-toolbar">
+          <select
+            class="select"
+            style="
+              width: auto;
+              height: 32px;
+              padding: 4px 10px;
+              font-size: 13px;
+            "
+          >
+            <option>JavaScript</option>
+            <option>Python</option>
+          </select>
+          <button class="btn btn-sm btn-ghost" title="Reset to starter code">
+            ↺ Reset
+          </button>
+          <div class="spacer"></div>
+          <span class="subtle hide-sm" style="font-size: 12px" id="saved"
+            >Saved</span
+          >
+          <button class="btn btn-sm" id="runBtn">▶ Run</button>
+          <button class="btn btn-sm btn-success" id="submitBtn">Submit</button>
+        </div>
+
+        <div class="editor">
+          <div class="gutter"></div>
+          <textarea spellcheck="false" aria-label="Code editor">
+function makeOutWord(out, word) {
+  return out.substring(0, 2) + word + out.substring(2);
+}</textarea
+          >
+        </div>
+
+        <div class="results">
+          <div class="results-head">
+            <h3>Test results</h3>
+            <div class="spacer"></div>
+            <span class="subtle hide-sm" style="font-size: 12px"
+              ><kbd class="tag" style="height: 20px">Ctrl</kbd> +
+              <kbd class="tag" style="height: 20px">Enter</kbd> to run</span
+            >
+          </div>
+          <div class="results-body" id="results">
+            <div class="results-empty">
+              Run your code to see how it does against the tests.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="assets/app.js"></script>
+    <script>
+      const tests = [
+        ['makeOutWord("<<>>", "Yay")', '"<<Yay>>"'],
+        ['makeOutWord("<<>>", "WooHoo")', '"<<WooHoo>>"'],
+        ['makeOutWord("[[]]", "word")', '"[[word]]"'],
+        ['makeOutWord("HHoo", "Hello")', '"HHHellooo"'],
+        ['makeOutWord("abyz", "YAY")', '"abYAYyz"'],
+        ['makeOutWord("()()", "x")', '"()x()"'],
+        ['makeOutWord("[[]]", "")', '"[[]]"'],
+      ];
+      const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+      function render(passAll) {
+        const rows = tests
+          .map(([call, exp], i) => {
+            const ok = passAll || i % 3 !== 1;
+            const got = ok
+              ? exp
+              : '"' + exp.slice(1, 3) + exp.slice(-3, -1) + '"';
+            return `<tr>
+        <td class="mono">${esc(call)}</td>
+        <td class="mono">${esc(exp)}</td>
+        <td class="mono">${esc(got)}</td>
+        <td><span class="status ${ok ? 'ok' : 'fail'}">${ok ? '✓ OK' : '✕ X'}</span></td>
+      </tr>`;
+          })
+          .join('');
+        const passed = passAll
+          ? tests.length
+          : tests.filter((_, i) => i % 3 !== 1).length;
+        const summary = passAll
+          ? `<div class="results-summary all-pass">🎉 All ${tests.length} tests passed! <span class="spacer"></span><span class="badge easy">+10 XP</span></div>`
+          : `<div class="results-summary some-fail">${passed} / ${tests.length} tests passed — keep going.</div>`;
+        document.getElementById('results').innerHTML =
+          summary +
+          `
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Call</th><th>Expected</th><th>Run</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+      }
+      document.getElementById('runBtn').onclick = () => render(false);
+      document.getElementById('submitBtn').onclick = () => render(true);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) render(false);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CodeDrill — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">&lt;/&gt;</span>CodeDrill</a
+        >
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="categories.html">Problems</a>
+          <a href="dashboard.html" class="active">Dashboard</a>
+          <a href="new-problem.html">Create</a>
+        </nav>
+        <div class="spacer"></div>
+        <label class="header-search">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
+          <input placeholder="Search problems…" />
+          <kbd>/</kbd>
+        </label>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <a href="dashboard.html" class="avatar" title="Your dashboard">AK</a>
+        <button class="icon-btn menu-btn" data-menu-toggle aria-label="Menu">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container">
+        <div class="card profile-card">
+          <div class="avatar lg">AK</div>
+          <div>
+            <h2>Aziz Karimov</h2>
+            <div class="profile-meta">
+              <span>@azizk</span><span>Joined Mar 2026</span
+              ><span>JavaScript · Python</span>
+            </div>
+          </div>
+          <div class="level-wrap">
+            <div class="row">
+              <span><b>Level 7</b> · Problem Solver</span
+              ><span class="subtle">1,860 / 2,400 XP</span>
+            </div>
+            <div class="progress"><span style="width: 77%"></span></div>
+          </div>
+          <a href="#" class="btn btn-sm">Edit profile</a>
+        </div>
+        <div class="stats">
+          <div class="card stat">
+            <div class="label">✅ Problems solved</div>
+            <div class="value">96</div>
+            <div class="delta">+8 this week</div>
+          </div>
+          <div class="card stat">
+            <div class="label">🔥 Current streak</div>
+            <div class="value">
+              12
+              <span
+                style="font-size: 15px; color: var(--text-3); font-weight: 500"
+                >days</span
+              >
+            </div>
+            <div class="subtle" style="font-size: 12px">Best: 19 days</div>
+          </div>
+          <div class="card stat">
+            <div class="label">🎯 Acceptance rate</div>
+            <div class="value">71%</div>
+            <div class="subtle" style="font-size: 12px">412 submissions</div>
+          </div>
+          <div class="card stat">
+            <div class="label">🏆 Achievements</div>
+            <div class="value">
+              9
+              <span
+                style="font-size: 15px; color: var(--text-3); font-weight: 500"
+                >/ 24</span
+              >
+            </div>
+            <div class="delta">+1 new</div>
+          </div>
+        </div>
+        <div class="tabs" data-tabs="dash" style="margin-bottom: 20px">
+          <button class="active" data-tab="overview">Overview</button>
+          <button data-tab="history">History</button>
+          <button data-tab="achievements">Achievements</button>
+        </div>
+        <div class="tab-panel active" id="overview" data-group="dash">
+          <div class="dash-grid">
+            <div class="stack">
+              <div class="card">
+                <div class="card-head">
+                  <h3>Activity</h3>
+                  <span class="subtle" style="font-size: 13px"
+                    >284 submissions in the last year</span
+                  >
+                </div>
+                <div class="card-pad">
+                  <div class="heatmap" id="heatmap"></div>
+                  <div
+                    class="row"
+                    style="justify-content: space-between; margin-top: 12px"
+                  >
+                    <span class="subtle" style="font-size: 12px"
+                      >Oct 2025 – Oct 2026</span
+                    >
+                    <div class="heat-legend">
+                      Less <i style="background: var(--heat-0)"></i
+                      ><i style="background: var(--heat-1)"></i
+                      ><i style="background: var(--heat-2)"></i
+                      ><i style="background: var(--heat-3)"></i
+                      ><i style="background: var(--heat-4)"></i> More
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h3>Recent submissions</h3>
+                  <a
+                    href="#"
+                    data-tab-link
+                    class="btn btn-sm btn-ghost"
+                    onclick="
+                      document.querySelector('[data-tab=history]').click();
+                      return false;
+                    "
+                    >View all →</a
+                  >
+                </div>
+                <div class="table-wrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Problem</th>
+                        <th>Category</th>
+                        <th>Result</th>
+                        <th>When</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <a href="problem.html" class="mono">xyzThere</a>
+                        </td>
+                        <td class="muted">String-2</td>
+                        <td><span class="status ok">✓ Solved</span></td>
+                        <td class="subtle">12 min ago</td>
+                      </tr>
+                      <tr>
+                        <td><a href="problem.html" class="mono">catDog</a></td>
+                        <td class="muted">String-2</td>
+                        <td><span class="status fail">✕ 3/8</span></td>
+                        <td class="subtle">40 min ago</td>
+                      </tr>
+                      <tr>
+                        <td><a href="problem.html" class="mono">countHi</a></td>
+                        <td class="muted">String-2</td>
+                        <td><span class="status ok">✓ Solved</span></td>
+                        <td class="subtle">2 h ago</td>
+                      </tr>
+                      <tr>
+                        <td><a href="problem.html" class="mono">sum13</a></td>
+                        <td class="muted">Array-2</td>
+                        <td><span class="status partial">◐ 6/9</span></td>
+                        <td class="subtle">Yesterday</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href="problem.html" class="mono">makeOutWord</a>
+                        </td>
+                        <td class="muted">String-1</td>
+                        <td><span class="status ok">✓ Solved</span></td>
+                        <td class="subtle">Yesterday</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="stack">
+              <div class="card">
+                <div class="card-head"><h3>By difficulty</h3></div>
+                <div class="card-pad diff-ring">
+                  <svg
+                    width="120"
+                    height="120"
+                    viewBox="0 0 42 42"
+                    aria-label="96 solved"
+                  >
+                    <circle
+                      cx="21"
+                      cy="21"
+                      r="15.9"
+                      fill="none"
+                      stroke="var(--surface-2)"
+                      stroke-width="5"
+                    />
+                    <circle
+                      cx="21"
+                      cy="21"
+                      r="15.9"
+                      fill="none"
+                      stroke="var(--easy)"
+                      stroke-width="5"
+                      stroke-dasharray="60 40"
+                      transform="rotate(-90 21 21)"
+                    />
+                    <circle
+                      cx="21"
+                      cy="21"
+                      r="15.9"
+                      fill="none"
+                      stroke="var(--medium)"
+                      stroke-width="5"
+                      stroke-dasharray="30 70"
+                      stroke-dashoffset="-60"
+                      transform="rotate(-90 21 21)"
+                    />
+                    <circle
+                      cx="21"
+                      cy="21"
+                      r="15.9"
+                      fill="none"
+                      stroke="var(--hard)"
+                      stroke-width="5"
+                      stroke-dasharray="10 90"
+                      stroke-dashoffset="-90"
+                      transform="rotate(-90 21 21)"
+                    />
+                    <text
+                      x="21"
+                      y="21"
+                      text-anchor="middle"
+                      font-size="8"
+                      font-weight="700"
+                      fill="var(--text)"
+                    >
+                      96
+                    </text>
+                    <text
+                      x="21"
+                      y="27"
+                      text-anchor="middle"
+                      font-size="3.6"
+                      fill="var(--text-3)"
+                    >
+                      solved
+                    </text>
+                  </svg>
+                  <div class="diff-legend">
+                    <div class="row">
+                      <span class="badge easy"
+                        ><span class="dot"></span>Easy</span
+                      ><b>58</b>
+                    </div>
+                    <div class="row">
+                      <span class="badge medium"
+                        ><span class="dot"></span>Medium</span
+                      ><b>29</b>
+                    </div>
+                    <div class="row">
+                      <span class="badge hard"
+                        ><span class="dot"></span>Hard</span
+                      ><b>9</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h3>Category progress</h3>
+                  <a href="categories.html" class="btn btn-sm btn-ghost">All</a>
+                </div>
+                <div class="card-pad cat-progress">
+                  <div>
+                    <div class="row">
+                      <span>Warmup-1</span><span>31/31</span>
+                    </div>
+                    <div class="progress success">
+                      <span style="width: 100%"></span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <span>String-1</span><span>27/33</span>
+                    </div>
+                    <div class="progress"><span style="width: 82%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <span>Warmup-2</span><span>14/20</span>
+                    </div>
+                    <div class="progress"><span style="width: 70%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <span>String-2</span><span>21/33</span>
+                    </div>
+                    <div class="progress"><span style="width: 64%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <span>Logic-1</span><span>12/36</span>
+                    </div>
+                    <div class="progress"><span style="width: 33%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row"><span>Array-2</span><span>8/34</span></div>
+                    <div class="progress"><span style="width: 24%"></span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><h3>Latest achievements</h3></div>
+                <div class="card-pad" style="display: grid; gap: 14px">
+                  <div class="row">
+                    <span
+                      class="achv-icon"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        margin: 0;
+                        font-size: 20px;
+                        background: var(--warning-soft);
+                      "
+                      >🔥</span
+                    >
+                    <div>
+                      <b style="font-size: 14px">On Fire</b>
+                      <div class="subtle" style="font-size: 12px">
+                        10-day streak · 2 days ago
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <span
+                      class="achv-icon"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        margin: 0;
+                        font-size: 20px;
+                        background: var(--success-soft);
+                      "
+                      >🏁</span
+                    >
+                    <div>
+                      <b style="font-size: 14px">Warmed Up</b>
+                      <div class="subtle" style="font-size: 12px">
+                        Completed Warmup-1 · last week
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-panel" id="history" data-group="dash">
+          <div class="filters">
+            <input class="input" placeholder="Search by problem name…" />
+            <select class="select" style="width: auto">
+              <option>All categories</option>
+              <option>String-1</option>
+              <option>String-2</option>
+              <option>Array-2</option>
+            </select>
+            <div class="segmented">
+              <button class="active">All</button><button>Solved</button
+              ><button>Failed</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Problem</th>
+                    <th>Category</th>
+                    <th>Difficulty</th>
+                    <th>Result</th>
+                    <th>Tests</th>
+                    <th>Language</th>
+                    <th>Submitted</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="problem.html" class="mono">xyzThere</a></td>
+                    <td class="muted">String-2</td>
+                    <td><span class="badge medium">Medium</span></td>
+                    <td><span class="status ok">✓ Solved</span></td>
+                    <td class="mono">8/8</td>
+                    <td>JavaScript</td>
+                    <td class="subtle">Oct 6, 14:22</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="problem.html" class="mono">catDog</a></td>
+                    <td class="muted">String-2</td>
+                    <td><span class="badge medium">Medium</span></td>
+                    <td><span class="status fail">✕ Failed</span></td>
+                    <td class="mono">3/8</td>
+                    <td>JavaScript</td>
+                    <td class="subtle">Oct 6, 13:54</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="problem.html" class="mono">countHi</a></td>
+                    <td class="muted">String-2</td>
+                    <td><span class="badge medium">Medium</span></td>
+                    <td><span class="status ok">✓ Solved</span></td>
+                    <td class="mono">7/7</td>
+                    <td>JavaScript</td>
+                    <td class="subtle">Oct 6, 12:10</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="problem.html" class="mono">sum13</a></td>
+                    <td class="muted">Array-2</td>
+                    <td><span class="badge medium">Medium</span></td>
+                    <td><span class="status partial">◐ Partial</span></td>
+                    <td class="mono">6/9</td>
+                    <td>Python</td>
+                    <td class="subtle">Oct 5, 21:03</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="problem.html" class="mono">makeOutWord</a></td>
+                    <td class="muted">String-1</td>
+                    <td><span class="badge easy">Easy</span></td>
+                    <td><span class="status ok">✓ Solved</span></td>
+                    <td class="mono">7/7</td>
+                    <td>JavaScript</td>
+                    <td class="subtle">Oct 5, 20:41</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="problem.html" class="mono">makeOutWord</a></td>
+                    <td class="muted">String-1</td>
+                    <td><span class="badge easy">Easy</span></td>
+                    <td><span class="status fail">✕ Error</span></td>
+                    <td class="mono">0/7</td>
+                    <td>JavaScript</td>
+                    <td class="subtle">Oct 5, 20:38</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="problem.html" class="mono">sleepIn</a></td>
+                    <td class="muted">Warmup-1</td>
+                    <td><span class="badge easy">Easy</span></td>
+                    <td><span class="status ok">✓ Solved</span></td>
+                    <td class="mono">4/4</td>
+                    <td>Python</td>
+                    <td class="subtle">Oct 4, 09:15</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="problem.html" class="mono">caughtSpeeding</a>
+                    </td>
+                    <td class="muted">Logic-1</td>
+                    <td><span class="badge easy">Easy</span></td>
+                    <td><span class="status ok">✓ Solved</span></td>
+                    <td class="mono">13/13</td>
+                    <td>JavaScript</td>
+                    <td class="subtle">Oct 3, 18:47</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-ghost">View code</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="row"
+              style="
+                justify-content: space-between;
+                padding: 14px 20px;
+                border-top: 1px solid var(--border);
+              "
+            >
+              <span class="subtle" style="font-size: 13px"
+                >Showing 1–8 of 412</span
+              >
+              <div class="row" style="gap: 6px">
+                <button class="btn btn-sm">← Prev</button
+                ><button class="btn btn-sm">Next →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-panel" id="achievements" data-group="dash">
+          <div class="achievements">
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--accent-soft)">
+                👣
+              </div>
+              <h4>First Steps</h4>
+              <p>Solve your first problem</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--success-soft)">
+                🏁
+              </div>
+              <h4>Warmed Up</h4>
+              <p>Complete Warmup-1</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--warning-soft)">
+                🔥
+              </div>
+              <h4>On Fire</h4>
+              <p>10-day streak</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--accent-soft)">
+                💯
+              </div>
+              <h4>Half Century</h4>
+              <p>Solve 50 problems</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--success-soft)">
+                ⚡
+              </div>
+              <h4>First Try</h4>
+              <p>Pass all tests on 1st run</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--danger-soft)">
+                🐛
+              </div>
+              <h4>Bug Squasher</h4>
+              <p>Fix a failing solution</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--warning-soft)">
+                🌙
+              </div>
+              <h4>Night Owl</h4>
+              <p>Solve after midnight</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--accent-soft)">
+                🐍
+              </div>
+              <h4>Polyglot</h4>
+              <p>Solve in 2 languages</p>
+            </div>
+            <div class="achv">
+              <div class="achv-icon" style="background: var(--success-soft)">
+                ✍️
+              </div>
+              <h4>Author</h4>
+              <p>Publish a problem</p>
+            </div>
+            <div class="achv locked">
+              <div class="achv-icon">🔁</div>
+              <h4>Recursive</h4>
+              <p>Complete Recursion-1</p>
+              <div class="progress"><span style="width: 0%"></span></div>
+            </div>
+            <div class="achv locked">
+              <div class="achv-icon">🏆</div>
+              <h4>Century</h4>
+              <p>Solve 100 problems</p>
+              <div class="progress"><span style="width: 96%"></span></div>
+            </div>
+            <div class="achv locked">
+              <div class="achv-icon">📅</div>
+              <h4>Unstoppable</h4>
+              <p>30-day streak</p>
+              <div class="progress"><span style="width: 40%"></span></div>
+            </div>
+            <div class="achv locked">
+              <div class="achv-icon">🧠</div>
+              <h4>Hardcore</h4>
+              <p>Solve 25 hard problems</p>
+              <div class="progress"><span style="width: 36%"></span></div>
+            </div>
+            <div class="achv locked">
+              <div class="achv-icon">🌟</div>
+              <h4>Completionist</h4>
+              <p>Finish every category</p>
+              <div class="progress"><span style="width: 23%"></span></div>
+            </div>
+            <div class="achv locked">
+              <div class="achv-icon">❤️</div>
+              <h4>Crowd Favorite</h4>
+              <p>Your problem solved 100×</p>
+              <div class="progress"><span style="width: 12%"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>© 2026 CodeDrill — a CodingBat-style practice site</span>
+        <span class="row"
+          ><a href="#">About</a><a href="#">Help</a><a href="#">GitHub</a></span
+        >
+      </div>
+    </footer>
+
+    <script src="assets/app.js"></script>
+    <script>
+      const hm = document.getElementById('heatmap');
+      let seed = 7;
+      const rand = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+      let html = '';
+      for (let i = 0; i < 53 * 7; i++) {
+        const r = rand() * (0.4 + i / (53 * 7));
+        const l = r < 0.35 ? 0 : r < 0.55 ? 1 : r < 0.75 ? 2 : r < 0.9 ? 3 : 4;
+        html += `<i data-l="${l}" title="${l * 2} submissions"></i>`;
+      }
+      hm.innerHTML = html;
+    </script>
+  </body>
+</html>
