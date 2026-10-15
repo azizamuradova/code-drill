@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id serial PRIMARY KEY,
   username text NOT NULL UNIQUE,
-  full_name text NOT NULL,
+  full_name text,
   is_admin boolean NOT NULL DEFAULT false,
   password text NOT NULL
 );
