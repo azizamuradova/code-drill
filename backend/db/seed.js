@@ -23,4 +23,20 @@ async function seed() {
       ('helloName', 'Return Hello name! If name is given', 2, 'easy', 'published'),
       ('firstLast6', 'Return true if the first or last number in array is 6', 3, 'easy', 'published')`,
   );
+  await db.query(
+    `INSERT INTO problem_code (problem_id, language, starter_code, solution_code)
+    VALUES
+      (1, 'javascript',
+        'function sleepIn(weekday, vacation) {\n\n}',
+        'function sleepIn(weekday, vacation) {\n  return !weekday || vacation;\n}'),
+      (2, 'javascript',
+        'function sumDouble(a, b) {\n\n}',
+        'function sumDouble(a, b) {\n  return a === b ? (a + b) * 2 : a + b;\n}'),
+      (3, 'javascript',
+        'function helloName(name) {\n\n}',
+        'function helloName(name) {\n  return "Hello " + name + "!";\n}'),
+      (4, 'javascript',
+        'function firstLast6(nums) {\n\n}',
+        'function firstLast6(nums) {\n  return nums[0] === 6 || nums[nums.length - 1] === 6;\n}')`,
+  );
 }
