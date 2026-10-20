@@ -39,4 +39,17 @@ async function seed() {
         'function firstLast6(nums) {\n\n}',
         'function firstLast6(nums) {\n  return nums[0] === 6 || nums[nums.length - 1] === 6;\n}')`,
   );
+  await db.query(
+    `INSERT INTO test_cases (problem_id, input, output, is_visible)
+    VALUES
+      (1, '[false, false]', 'true', true),
+      (1, '[true, false]', 'false', true),
+      (1, '[false, true]', 'true', false),
+      (2, '[1, 2]', '3', true),
+      (2, '[2, 2]', '8', true),
+      (3, '["Bob"]', '"Hello Bob!"', true),
+      (3, '["Alice"]', '"Hello Alice!"', true),
+      (4, '[[1, 2, 6]]', 'true', true),
+      (4, '[[3, 2, 1]]', 'false', true)`,
+  );
 }
