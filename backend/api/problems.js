@@ -7,5 +7,6 @@ router.get('/:id', async (req, res) => {
   const problem = await getProblemById(req.params.id);
   if (!problem) return res.status(404).send('Problem not found.');
   const testCases = await getVisibleTestCases(problem.id);
+  delete problem.solution_code;
   res.send({ ...problem, testCases });
 });
