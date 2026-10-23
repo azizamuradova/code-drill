@@ -1,12 +1,30 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log('Logging in with:', username, password);
+    setError(null);
+
+    const response = await fetch('http://localhost:3000/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!response.ok) {
+      setError(await response.text());
+      return;
+    }
+
+    const token = await response.text();
+    localStorage.setItem('token', token);
+    navigate('/');
   }
 
   return (
@@ -31,6 +49,7 @@ export default function Login() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </label>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <button className='btn btn-primary' type='submit'>
             Log in
           </button>
