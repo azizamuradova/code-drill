@@ -1,29 +1,97 @@
-# CodeDrill — UI design prototype
+# Code Drill
 
-Static HTML/CSS prototype for a CodingBat-style practice site. It's only meant as a visual reference for building the real React frontend. The data is hard-coded and the interactions are faked.
+Code Drill is a coding practice platform where users can practice and improve their coding skills. Users pick a problem, write JavaScript in the browser, run it against test cases, and earn points for every problem they solve. Problems are grouped into categories and difficulty levels, so the app works for both beginners and more advanced learners.
 
-Open `index.html` in a browser; every page links to the others.
+> Capstone project — work in progress.
 
-| Page | File | What it shows |
-|---|---|---|
-| Home | `index.html` | Hero, "continue where you left off", topic preview, features |
-| Problem categories | `categories.html` | All categories grouped by level, filters, progress per category |
-| Category (problem list) | `category.html` | Sidebar of categories + problem list with solved/attempted state |
-| Problem | `problem.html` | Split view: statement/examples/hint on the left, code editor + test results table on the right. **Run** shows a partial fail and **Submit** shows all tests passing. |
-| Dashboard | `dashboard.html` | Profile + level/XP, stat tiles, activity heatmap, difficulty donut, category progress, plus **History** and **Achievements** tabs |
-| New problem | `new-problem.html` | 4-step form (basics, description, code, test cases) with live learner preview and checklist |
+## Features (MVP)
 
-## Design system
+- Sign up and log in
+- Browse problems by category
+- Write code, run it, and see test results
+- Earn points for solved problems
+- See progress and points on a dashboard
 
-Everything lives in `assets/styles.css`:
+## Tech Stack
 
-- **Tokens**: colors, radii and shadows are CSS variables on `:root`. Dark mode overrides them (it follows the OS setting, and the moon button toggles it).
-- **Fonts**: Inter (UI) and JetBrains Mono (code, method names).
-- **Components**: `.btn` (`-primary`, `-success`, `-ghost`, `-sm`, `-lg`), `.card`, `.badge` (`easy`/`medium`/`hard`/`accent`), `.progress`, `.tabs`, `.segmented`, `.table`, `.input`/`.select`/`.textarea`, `.status` (`ok`/`fail`/`partial`), `.check`, `.achv`.
-- **Breakpoints**: 1024px (columns stack), 720px (phone: hamburger nav, single column).
+- **Frontend:** React, Vite, React Router
+- **Backend:** Node.js, Express
+- **Database:** PostgreSQL
+- **Auth:** bcrypt (password hashing), JSON Web Tokens
 
-## Suggested React component split
+## Project Structure
 
-`Header`, `CategoryCard`, `ProblemListItem`, `DifficultyBadge`, `ProgressBar`, `CodeEditor` (swap the textarea for Monaco or CodeMirror), `TestResultsTable`, `StatCard`, `ActivityHeatmap`, `AchievementCard`, `TestCaseRow`.
+```
+code-drill/
+├── backend/
+│   ├── api/            # Express routes
+│   ├── db/
+│   │   ├── queries/    # SQL query functions
+│   │   ├── schema.sql  # database tables
+│   │   └── seed.js     # sample data
+│   └── middleware/     # auth helpers
+└── frontend/
+    ├── src/
+    │   └── pages/      # React pages
+    └── prototype/      # original HTML/CSS design
+```
 
-`assets/app.js` only exists for the prototype (theme toggle, tabs, editor line numbers). Replace it with React state.
+## Database
+
+Six tables: `users`, `categories`, `problems`, `test_cases`, `submissions`, `user_problems`.
+
+## API Endpoints
+
+| Method | Endpoint | Description | Status |
+|---|---|---|---|
+| POST | `/users/register` | Create an account | ✅ |
+| POST | `/users/login` | Log in, returns a token | ✅ |
+| GET | `/users/me` | Get the logged-in user | ✅ |
+| GET | `/categories` | Get all categories | ✅ |
+| GET | `/categories/:id/problems` | Get the problems in a category | ✅ |
+| GET | `/problems/:id` | Get one problem with its visible test cases | ✅ |
+| POST | `/problems/:id/submissions` | Submit code and run the tests | ⬜ |
+| GET | `/users/me/submissions` | Get the user's past submissions | ⬜ |
+| GET | `/users/me/progress` | Get solved problems and points | ⬜ |
+
+## Progress
+
+- [x] Project pitch and HTML/CSS design prototype
+- [x] Database schema and seed data
+- [x] Backend setup with register and login
+- [x] Category and problem endpoints
+- [x] React setup and Login page connected to the backend
+- [ ] Categories, Category, and Problem pages
+- [ ] Code submission and test runner
+- [ ] Dashboard
+- [ ] Deployment
+
+## Getting Started
+
+Requires Node.js 22+ and PostgreSQL.
+
+**Backend**
+
+```bash
+cd backend
+npm install
+cp example.env .env      # then fill in DATABASE_URL and JWT_SECRET
+createdb code_drill
+npm run db:reset         # create tables and add sample data
+npm run dev              # http://localhost:3000
+```
+
+**Frontend** (in a second terminal)
+
+```bash
+cd frontend
+npm install
+npm run dev              # http://localhost:5173
+```
+
+Sample user: `foo` / `bar`
+
+## Credits
+
+- Backend started from the Fullstack Academy capstone backend template.
+- Practice problems are inspired by [CodingBat](https://codingbat.com).
