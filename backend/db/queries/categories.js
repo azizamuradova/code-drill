@@ -1,5 +1,6 @@
 import db from '#db/client';
 
+// Returns all categories//
 export async function getCategories() {
   const sql = `
   SELECT * FROM categories ORDER BY id

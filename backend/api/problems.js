@@ -3,6 +3,7 @@ const router = express.Router();
 export default router;
 import { getProblemById, getVisibleTestCases } from '#db/queries/problems';
 
+// GETS problems by id and sends one problem with test cases and no solution//
 router.get('/:id', async (req, res) => {
   const problem = await getProblemById(req.params.id);
   if (!problem) return res.status(404).send('Problem not found.');
