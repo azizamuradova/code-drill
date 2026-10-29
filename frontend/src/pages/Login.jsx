@@ -28,7 +28,7 @@ export default function Login() {
   }
 
   return (
-    <main className='container' style={{ maxWidth: 400, marginTop: 60 }}>
+    <div className='container page' style={{ maxWidth: 400, marginTop: 60 }}>
       <div className='card' style={{ padding: 24 }}>
         <h1>Log in</h1>
         <form onSubmit={handleSubmit}>
@@ -55,6 +55,6 @@ export default function Login() {
           </button>
         </form>
       </div>
-    </main>
+    </div>
   );
 }
