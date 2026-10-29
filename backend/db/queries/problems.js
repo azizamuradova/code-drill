@@ -28,3 +28,10 @@ export async function getVisibleTestCases(problemId) {
   const { rows: testCases } = await db.query(sql, [problemId]);
   return testCases;
 }
+export async function getAllTestCases(problemId) {
+  const sql = `
+  SELECT * FROM test_cases WHERE problem_id = $1 
+  `;
+  const { rows: testCases } = await db.query(sql, [problemId]);
+  return testCases;
+}
