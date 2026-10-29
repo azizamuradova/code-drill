@@ -8,3 +8,12 @@ export async function getCategories() {
   const { rows: categories } = await db.query(sql);
   return categories;
 }
+export async function getCategory(id) {
+  const sql = `
+  SELECT * FROM categories WHERE id = $1
+  `;
+  const {
+    rows: [category],
+  } = await db.query(sql, [id]);
+  return category;
+}
