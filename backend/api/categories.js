@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const category = await getCategory(req.params.id);
+  if (!category) return res.status(404).send('Category not found.');
   res.send(category);
 });
 
