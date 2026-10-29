@@ -1,5 +1,9 @@
 import db from '#db/client';
 import { createUser } from '#db/queries/users';
+import { categories } from '#db/seedData';
+
+const XP_BY_DIFFICULTY = { easy: 10, medium: 20, hard: 30 };
+const VISIBLE_TESTS = 2;
 
 await db.connect();
 await seed();
@@ -8,49 +12,72 @@ console.log('🌱 Database seeded.');
 
 async function seed() {
   await createUser('foo', 'bar');
-  await db.query(
-    `INSERT INTO categories (name, description, difficulty, group_name, icon_name)
-    VALUES
-      ('Warmup-1', 'Simple warmup problems', 'easy', 'Fundamentals', 'flame'),
-      ('String-1', 'Basic string problems', 'easy', 'Strings & Arrays', 'text'),
-      ('Array-1', 'Basic array problems', 'easy', 'Strings & Arrays', 'list')`,
-  );
-  await db.query(
-    `INSERT INTO problems (name, description, category_id, difficulty, starter_code, solution_code)
-    VALUES
-      ('sleepIn',
-        'Return true if we sleep in: it is not a weekday, or we are on vacation.',
-        1, 'easy',
-        'function sleepIn(weekday, vacation) {\n\n}',
-        'function sleepIn(weekday, vacation) {\n  return !weekday || vacation;\n}'),
-      ('sumDouble',
-        'Return the sum of two numbers. If they are the same, return double the sum.',
-        1, 'easy',
-        'function sumDouble(a, b) {\n\n}',
-        'function sumDouble(a, b) {\n  return a === b ? (a + b) * 2 : a + b;\n}'),
-      ('helloName',
-        'Return Hello name! If name is given',
-        2, 'easy',
-        'function helloName(name) {\n\n}',
-        'function helloName(name) {\n  return "Hello " + name + "!";\n}'),
-      ('firstLast6',
-        'Return true if the first or last number in array is 6',
-        3, 'easy',
-        'function firstLast6(nums) {\n\n}',
-        'function firstLast6(nums) {\n  return nums[0] === 6 || nums[nums.length - 1] === 6;\n}')`,
-  );
+  for (const [categoryIndex, category] of categories.entries()) {
+    const categoryId = await insertCategory(category, categoryIndex);
+    for (const [problemIndex, problem] of category.problems.entries()) {
+      await insertProblem(
+        problem,
+        categoryId,
+        category.difficulty,
+        problemIndex,
+      );
+    }
+  }
+}
 
-  await db.query(
-    `INSERT INTO test_cases (problem_id, input, output, is_visible)
-    VALUES
-      (1, '[false, false]', 'true', true),
-      (1, '[true, false]', 'false', true),
-      (1, '[false, true]', 'true', false),
-      (2, '[1, 2]', '3', true),
-      (2, '[2, 2]', '8', true),
-      (3, '["Bob"]', '"Hello Bob!"', true),
-      (3, '["Alice"]', '"Hello Alice!"', true),
-      (4, '[[1, 2, 6]]', 'true', true),
-      (4, '[[3, 2, 1]]', 'false', true)`,
-  );
+async function insertCategory(category, position) {
+  const sql = `
+  INSERT INTO categories (name, description, difficulty, group_name, icon_name, position)
+  VALUES ($1, $2, $3, $4, $5, $6)
+  RETURNING id
+  `;
+  const {
+    rows: [{ id }],
+  } = await db.query(sql, [
+    category.name,
+    category.description,
+    category.difficulty,
+    category.group_name,
+    category.icon_name,
+    position,
+  ]);
+  return id;
+}
+
+async function insertProblem(problem, categoryId, difficulty, position) {
+  const [, name, params] = problem.solution.match(/^function (\w+)\(([^)]*)\)/);
+  const starterCode = `function ${name}(${params}) {\n\n}`;
+  const sql = `
+  INSERT INTO problems
+    (name, description, category_id, difficulty, xp_points, starter_code, solution_code, position)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+  RETURNING id
+  `;
+  const {
+    rows: [{ id }],
+  } = await db.query(sql, [
+    name,
+    problem.description,
+    categoryId,
+    difficulty,
+    XP_BY_DIFFICULTY[difficulty],
+    starterCode,
+    problem.solution,
+    position,
+  ]);
+
+  const solve = new Function(`${problem.solution}\nreturn ${name};`)();
+  for (const [testIndex, input] of problem.tests.entries()) {
+    await db.query(
+      `INSERT INTO test_cases (problem_id, input, output, is_visible, position)
+      VALUES ($1, $2, $3, $4, $5)`,
+      [
+        id,
+        JSON.stringify(input),
+        JSON.stringify(solve(...input)),
+        testIndex < VISIBLE_TESTS,
+        testIndex,
+      ],
+    );
+  }
 }
