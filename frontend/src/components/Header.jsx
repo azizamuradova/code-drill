@@ -1,5 +1,6 @@
 import { useAuth } from '../auth/AuthContext';
 import { Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 // Navbar
 export default function Header() {
@@ -18,22 +19,7 @@ export default function Header() {
         </nav>
         <div className='spacer' />
 
-        {/* <button
-          className="icon-btn"
-          data-theme-toggle
-          aria-label="Toggle theme"
-        >
-          <svg
-            width={18}
-            height={18}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-          </svg>
-        </button> */}
+        <ThemeToggle />
         {user ? (
           <>
             <span className='subtle'>Hi, {user.username}</span>
