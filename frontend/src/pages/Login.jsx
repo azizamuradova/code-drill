@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -23,7 +25,7 @@ export default function Login() {
     }
 
     const token = await response.text();
-    localStorage.setItem('token', token);
+    login(token);
     navigate('/');
   }
 
