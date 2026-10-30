@@ -3,7 +3,9 @@
     'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --bg: #f7f8fa;
+  --bg: #f6f5ff;
+  --glow-1: rgba(81, 70, 229, 0.3);
+  --glow-2: rgba(168, 85, 247, 0.2);
   --surface: #ffffff;
   --surface-2: #f1f3f6;
   --border: #e3e6eb;
@@ -57,6 +59,8 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: #0d0f13;
+    --glow-1: rgba(124, 116, 255, 0.2);
+    --glow-2: rgba(168, 85, 247, 0.2);
     --surface: #15181e;
     --surface-2: #1c2028;
     --border: #262b35;
@@ -89,6 +93,8 @@
 }
 :root[data-theme='dark'] {
   --bg: #0d0f13;
+  --glow-1: rgba(124, 116, 255, 0.16);
+  --glow-2: rgba(168, 85, 247, 0.2);
   --surface: #15181e;
   --surface-2: #1c2028;
   --border: #262b35;
@@ -133,7 +139,11 @@ body {
   font-size: 15px;
   line-height: 1.55;
   color: var(--text);
-  background: var(--bg);
+  background:
+    radial-gradient(900px 500px at 100% 0%, var(--glow-1), transparent 60%),
+    radial-gradient(800px 500px at 0% 100%, var(--glow-2), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 a {
