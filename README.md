@@ -2,7 +2,7 @@
 
 Code Drill is a coding practice platform where users can practice and improve their coding skills. Users pick a problem, write JavaScript in the browser, run it against test cases, and earn points for every problem they solve. Problems are grouped into categories and difficulty levels, so the app works for both beginners and more advanced learners.
 
-> Capstone project — work in progress.
+> Fullstack capstone project for Fullstack Academy.
 
 ## Features (MVP)
 
@@ -11,10 +11,11 @@ Code Drill is a coding practice platform where users can practice and improve th
 - Write code, run it, and see test results
 - Earn points for solved problems
 - See progress and points on a dashboard
+- Dark and light mode
 
 ## Tech Stack
 
-- **Frontend:** React, Vite, React Router
+- **Frontend:** React, Vite, React Router, CodeMirror (code editor)
 - **Backend:** Node.js, Express
 - **Database:** PostgreSQL
 - **Auth:** bcrypt (password hashing), JSON Web Tokens
@@ -28,10 +29,14 @@ code-drill/
 │   ├── db/
 │   │   ├── queries/    # SQL query functions
 │   │   ├── schema.sql  # database tables
-│   │   └── seed.js     # sample data
-│   └── middleware/     # auth helpers
+│   │   ├── seed.js     # inserts the sample data
+│   │   └── seedData.js # 10 categories, 100 problems
+│   ├── middleware/     # auth helpers
+│   └── services/       # code runner (runs user code against tests)
 └── frontend/
     ├── src/
+    │   ├── auth/       # AuthContext (login state)
+    │   ├── components/ # Header, Footer, CodeEditor, TestResults…
     │   └── pages/      # React pages
     └── prototype/      # original HTML/CSS design
 ```
@@ -42,28 +47,29 @@ Six tables: `users`, `categories`, `problems`, `test_cases`, `submissions`, `use
 
 ## API Endpoints
 
-| Method | Endpoint | Description | Status |
-|---|---|---|---|
-| POST | `/users/register` | Create an account | ✅ |
-| POST | `/users/login` | Log in, returns a token | ✅ |
-| GET | `/users/me` | Get the logged-in user | ✅ |
-| GET | `/categories` | Get all categories | ✅ |
-| GET | `/categories/:id/problems` | Get the problems in a category | ✅ |
-| GET | `/problems/:id` | Get one problem with its visible test cases | ✅ |
-| POST | `/problems/:id/submissions` | Submit code and run the tests | ⬜ |
-| GET | `/users/me/submissions` | Get the user's past submissions | ⬜ |
-| GET | `/users/me/progress` | Get solved problems and points | ⬜ |
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/users/register` | Create an account |
+| POST | `/users/login` | Log in, returns a token |
+| GET | `/users/me` | Get the logged-in user |
+| GET | `/users/me/submissions` | Get the user's latest submissions |
+| GET | `/users/me/progress` | Get solved problems, XP, and progress per category |
+| GET | `/categories` | Get all categories with their problem counts |
+| GET | `/categories/:id` | Get one category |
+| GET | `/categories/:id/problems` | Get the problems in a category |
+| GET | `/problems/:id` | Get one problem with its visible test cases |
+| POST | `/problems/:id/run` | Run code against the tests (nothing is saved) |
+| POST | `/problems/:id/submissions` | Submit code, save the result, and earn XP (login required) |
 
 ## Progress
 
 - [x] Project pitch and HTML/CSS design prototype
-- [x] Database schema and seed data
-- [x] Backend setup with register and login
-- [x] Category and problem endpoints
-- [x] React setup and Login page connected to the backend
-- [ ] Categories, Category, and Problem pages
-- [ ] Code submission and test runner
-- [ ] Dashboard
+- [x] Database schema and seed data (10 categories, 100 problems)
+- [x] Register and login with JWT
+- [x] Categories, Category, and Problem pages
+- [x] Code runner with Run and Submit
+- [x] Dashboard with XP and progress
+- [x] Dark and light mode
 - [ ] Deployment
 
 ## Getting Started
