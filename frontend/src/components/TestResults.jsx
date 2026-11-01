@@ -23,13 +23,21 @@ export default function TestResults({ result, error, methodName }) {
   }
 
   const allPassed = result.testsPassed === result.testsTotal;
+  const isSolvedSubmit = allPassed && result.xpEarned !== undefined;
 
   return (
     <>
+      {isSolvedSubmit && (
+        <div className='celebrate' aria-hidden='true'>
+          🎉
+        </div>
+      )}
       {allPassed ? (
         <div className='results-summary all-pass'>
           🎉 All {result.testsTotal} tests passed!
-          {result.xpEarned > 0 && ` +${result.xpEarned} XP`}
+          {result.xpEarned > 0 && (
+            <span className='xp-badge'>+{result.xpEarned} XP</span>
+          )}
         </div>
       ) : (
         <div className='results-summary some-fail'>

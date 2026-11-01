@@ -33,6 +33,7 @@ export default function Problem() {
 
       setIsRunning(true);
       setRunError('');
+      setResult(null);
       const path = isSubmit ? 'submissions' : 'run';
       const headers = { 'Content-Type': 'application/json' };
       if (isSubmit) headers.Authorization = `Bearer ${token}`;
