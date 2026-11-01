@@ -23,12 +23,19 @@ export default function Categories() {
     return matchesDifficulty && matchesSearch;
   });
 
+  const totalProblems = categories.reduce(
+    (sum, category) => sum + category.problem_count,
+    0,
+  );
+
   return (
     <div className='container page'>
       <div className='page-head'>
         <div>
           <h1>Problem categories</h1>
-          <p>14 topics · 412 problems · you've solved 96 so far</p>
+          <p>
+            {categories.length} topics · {totalProblems} problems
+          </p>
         </div>
         <div className='segmented'>
           <button className='active'>JavaScript</button>
