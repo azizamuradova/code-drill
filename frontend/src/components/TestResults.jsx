@@ -29,6 +29,7 @@ export default function TestResults({ result, error, methodName }) {
       {allPassed ? (
         <div className='results-summary all-pass'>
           🎉 All {result.testsTotal} tests passed!
+          {result.xpEarned > 0 && ` +${result.xpEarned} XP`}
         </div>
       ) : (
         <div className='results-summary some-fail'>
@@ -52,7 +53,11 @@ export default function TestResults({ result, error, methodName }) {
                 {test.input ? (
                   <>
                     <td className='mono'>
-                      {methodName}({test.input.map((value) => JSON.stringify(value)).join(', ')})
+                      {methodName}(
+                      {test.input
+                        .map((value) => JSON.stringify(value))
+                        .join(', ')}
+                      )
                     </td>
                     <td className='mono'>{test.expected}</td>
                     <td className='mono'>{test.actual}</td>

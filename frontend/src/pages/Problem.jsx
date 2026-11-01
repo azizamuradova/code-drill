@@ -93,15 +93,15 @@ export default function Problem() {
         <div className='problem-pane-inner'>
           <div className='tab-panel active' id='desc' data-group='left'>
             <div className='breadcrumb'>
-              <a href='categories.html'>Problems</a>
+              <Link to='/categories'>Problems</Link>
               <span>/</span>
-              <a href='category.html'>{problem?.name}</a>
-              <span>/</span>
-              <span>4 of 33</span>
+              <Link to={`/categories/${problem.category_id}`}>
+                Back to category
+              </Link>
             </div>
             <div className='problem-title-row'>
               <h1>{problem?.name}</h1>
-              <span className={`badge ${problem?.name}`}>
+              <span className={`badge ${problem?.difficulty}`}>
                 <span className='dot' />
                 {problem?.difficulty}
               </span>
@@ -183,18 +183,9 @@ export default function Problem() {
           <button
             className='btn btn-sm btn-ghost'
             title='Reset to starter code'
-          >
-            ↺ Reset
-          </button>
+            onClick={() => setCode(problem.starter_code)}
+          />
           <div className='spacer' />
-
-          <span
-            className='subtle hide-sm'
-            style={{ fontSize: '12px' }}
-            id='saved'
-          >
-            Saved
-          </span>
           <button
             className='btn btn-sm'
             onClick={() => sendCode(false)}
