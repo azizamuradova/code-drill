@@ -34,11 +34,10 @@ code-drill/
 │   ├── middleware/     # auth helpers
 │   └── services/       # code runner (runs user code against tests)
 └── frontend/
-    ├── src/
-    │   ├── auth/       # AuthContext (login state)
-    │   ├── components/ # Header, Footer, CodeEditor, TestResults…
-    │   └── pages/      # React pages
-    └── prototype/      # original HTML/CSS design
+    └── src/
+        ├── auth/       # AuthContext (login state)
+        ├── components/ # Header, Footer, CodeEditor, TestResults…
+        └── pages/      # React pages
 ```
 
 ## Database
