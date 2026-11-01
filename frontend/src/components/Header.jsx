@@ -23,6 +23,9 @@ export default function Header() {
         {user ? (
           <>
             <span className='subtle'>Hi, {user.username}</span>
+            <Link className='btn btn-primary' to='/dashboard'>
+              Dashboard
+            </Link>
             <button className='btn btn-sm btn-ghost' onClick={logout}>
               Log out
             </button>

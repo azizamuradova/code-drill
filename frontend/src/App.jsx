@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/categories/:id' element={<Category />} />
           <Route path='/problems/:id' element={<Problem />} />

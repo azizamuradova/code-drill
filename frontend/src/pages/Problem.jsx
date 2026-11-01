@@ -22,31 +22,47 @@ export default function Problem() {
       });
   }, [id]);
 
-  const execute = useCallback(async () => {
-    setIsRunning(true);
-    setRunError('');
-    try {
-      const response = await fetch(`http://localhost:3000/problems/${id}/run`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
+  const sendCode = useCallback(
+    async (isSubmit) => {
+      const token = localStorage.getItem('token');
+      if (isSubmit && !token) {
         setResult(null);
-        setRunError(data.error ?? 'Something went wrong. Try again.');
+        setRunError('Log in to submit your code.');
         return;
       }
-      setResult(data);
-    } catch {
-      setResult(null);
-      setRunError('Could not reach the server. Is the backend running?');
-    } finally {
-      setIsRunning(false);
-    }
-  }, [id, code]);
+
+      setIsRunning(true);
+      setRunError('');
+      const path = isSubmit ? 'submissions' : 'run';
+      const headers = { 'Content-Type': 'application/json' };
+      if (isSubmit) headers.Authorization = `Bearer ${token}`;
+
+      try {
+        const response = await fetch(
+          `http://localhost:3000/problems/${id}/${path}`,
+          { method: 'POST', headers, body: JSON.stringify({ code }) },
+        );
+        if (response.status === 401) {
+          setResult(null);
+          setRunError('Log in to submit your code.');
+          return;
+        }
+        const data = await response.json();
+        if (!response.ok) {
+          setResult(null);
+          setRunError(data.error ?? 'Something went wrong. Try again.');
+          return;
+        }
+        setResult(data);
+      } catch {
+        setResult(null);
+        setRunError('Could not reach the server. Is the backend running?');
+      } finally {
+        setIsRunning(false);
+      }
+    },
+    [id, code],
+  );
 
   const updateCode = React.useCallback((val) => {
     // console.log('val:', val);
@@ -77,15 +93,15 @@ export default function Problem() {
         <div className='problem-pane-inner'>
           <div className='tab-panel active' id='desc' data-group='left'>
             <div className='breadcrumb'>
-              <Link to='/categories'>Problems</Link>
+              <a href='categories.html'>Problems</a>
               <span>/</span>
-              <Link to={`/categories/${problem.category_id}`}>
-                Back to category
-              </Link>
+              <a href='category.html'>{problem?.name}</a>
+              <span>/</span>
+              <span>4 of 33</span>
             </div>
             <div className='problem-title-row'>
               <h1>{problem?.name}</h1>
-              <span className={`badge ${problem?.difficulty}`}>
+              <span className={`badge ${problem?.name}`}>
                 <span className='dot' />
                 {problem?.difficulty}
               </span>
@@ -167,15 +183,30 @@ export default function Problem() {
           <button
             className='btn btn-sm btn-ghost'
             title='Reset to starter code'
-            onClick={() => setCode(problem.starter_code)}
           >
             ↺ Reset
           </button>
           <div className='spacer' />
-          <button className='btn btn-sm' onClick={execute} disabled={isRunning}>
-            {isRunning ? 'Running…' : '▶ Run'}
+
+          <span
+            className='subtle hide-sm'
+            style={{ fontSize: '12px' }}
+            id='saved'
+          >
+            Saved
+          </span>
+          <button
+            className='btn btn-sm'
+            onClick={() => sendCode(false)}
+            disabled={isRunning}
+          >
+            {isRunning ? 'Running…' : '▶️ Run'}
           </button>
-          <button className='btn btn-sm btn-success' id='submitBtn'>
+          <button
+            className='btn btn-sm btn-success'
+            onClick={() => sendCode(true)}
+            disabled={isRunning}
+          >
             Submit
           </button>
         </div>
